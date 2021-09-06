@@ -35,8 +35,8 @@
                         </thead>
 
                         <tbody>
-                             <tr *ngFor="let values of allData; let indexOfelement=index;">
-                                 <td>{{indexOfelement+1}}</td>
+                             <tr *ngFor="let values of allData; let i=index;">
+                                 <td>{{i+1}}</td>
                                  <td>{{ values?.name}}</td>
                                  <td>{{ values?.email}}</td>
                                  <td>{{values?.phone_no}}</td>
@@ -45,10 +45,12 @@
                                  <td>{{values?.graduation_year}}</td>
                                   <td>{{values?.device_type}}</td>
                                   <td><a href="#">View Details</a></td>
-                                  <td class="xyz">
-                                      <a href="#"><i class="fa fa-lock" aria-hidden="true"></i></a>
-                                      <a  (click)="deletitem(data,index)"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                  </td>
+                                  <td style="display: flex; align-items: center;">
+                                        <a (click)=" blockUnblock(values,i)"><i  class="fa fa-lock" aria-hidden="true"></i></a>
+                                        <span class="fa-span d-flex ml-3">
+                                            <i (click)="deletitem(values,i)" class="fa-css cursor-pointer action-fa fa fa-trash"></i>
+                                        </span>
+                            </td>
                              </tr>
                         </tbody>
                     </table>

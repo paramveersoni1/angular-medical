@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+        {{!modalData ? 'Add' : 'Edit'}} {{util?.breadcrumb}}
+    </h4>
+</div>
+
+<form >
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-10 col-md-12 ">
+                <div class="form-group">
+                    <label class="required">Name in English</label>
+                    <input type="text"  class="form-control" placeholder="Name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-12 ">
+                <div class="form-group">
+                    <label class="required">Name in French</label>
+                    <input type="text"   class="form-control" placeholder="Name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12 modal-footer-button">
+            <button (click)="bsModalRef.hide()" type="button" class="btn btn-default mr-3">Cancel</button>
+            <button type="submit" class="btn btn-primary">{{!modalData ? 'Submit' : 'Update'}}</button>
+        </div>
+    </div>
+</form>

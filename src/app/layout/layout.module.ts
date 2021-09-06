@@ -11,7 +11,7 @@ import { HeaderComponent } from './common/header/header.component';
 // modules
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ChangePasswordModule } from './common/change-password/change-password.module';
-import { HomebannerComponent } from './homebanner/homebanner.component';
+
 
 
 @NgModule({
@@ -19,7 +19,6 @@ import { HomebannerComponent } from './homebanner/homebanner.component';
     LayoutComponent,
     SideBarComponent,
     HeaderComponent,
-    HomebannerComponent,
   ],
   imports: [
     CommonModule,

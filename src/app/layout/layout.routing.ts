@@ -19,6 +19,11 @@ const routes: Routes = [
                 loadChildren: './universitie/universitie.module#UniversitieModule',
                 data: {breadcrumb: 'universitie', title: 'universitie'}
             },
+            {
+                path: 'homebanner',
+                loadChildren: './homebanner/homebanner.module#HomebannerModule',
+                data: {breadcrumb: 'homebanner', title: 'homebanner'}
+            },
         ]
     }
 ];

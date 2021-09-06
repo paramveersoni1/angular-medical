@@ -4,6 +4,7 @@ import { ApiUrl } from 'src/app/core/apiUrl';
 import { HttpService } from 'src/app/services/http/http.service';
 import { UtilService } from 'src/app/services/util/util.service';
 import { MessageService } from 'src/app/services/message/message.service';
+import { SuccessErrorConst } from 'src/app/core/successErrorConst';
 
 @Component({
     selector: 'app-users',
@@ -11,13 +12,13 @@ import { MessageService } from 'src/app/services/message/message.service';
 })
 export class UsersComponent implements OnInit {
 
-    allData: any;
+    allData: any =[];
     name :any;
     
     constructor(private http: HttpService, private message: MessageService, public util: UtilService) {
     }
 
-    ngOnInit() {
+    ngOnInit():void {
         this.datalist();
     }
     
@@ -29,25 +30,46 @@ export class UsersComponent implements OnInit {
     }
 
     deletitem(data, index) {
-      const obj: any = {
-        user_id: data._id,
-        isDeleted: true
-       
-      };
-      this.http.putData(ApiUrl.userdelete, obj).subscribe((res) => {
-        this.allData.splice(index, 1)
-      }, error => {});
+      this.message.confirm(`delete this ${this.util.title}`).then(result => {
+        if (result.value) {
+            const obj: any = {
+              user_id: data._id,
+                is_deleted: true
+                
+            };
+            this.http.putData(ApiUrl.userdelete,obj).subscribe(() => {
+                this.message.toast('success', SuccessErrorConst.deleteSuccess);
+                this.allData.splice(index,1);
+            });
+        }
+    });
       
     }
-    
-  //   Search(){
-  //     if(this.name == ""){
-  //       this.ngOnInit();
-  //     }else{
-  //       this.allData = this.allData.filter(res =>{
-  //         return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase()); 
-  //       })
-  //     }
-  // }
+  blockUnblock(data) {
+        const obj: any = {
+          user_id: data._id,
+            is_blocked: !data.is_blocked
+        };
+        this.http.putData(ApiUrl.userdelete,obj).subscribe(() => {
+            this.util.checkBlockUnblock(data);
+        }, () => {
+     });
+}
 
+// deleteData(data,index) {
+//     this.message.confirm(`delete this ${this.util.title}`).then(result => {
+//         if (result.value) {
+//             const obj: any = {
+//               user_id: data._id,
+//                 is_deleted: true
+//             };
+//             this.http.putData(ApiUrl.userdelete,obj,true).subscribe(() => {
+//                 this.message.toast('success', SuccessErrorConst.deleteSuccess);
+//                 this.allData.splice(index,1);
+//             }, () => {
+//             });
+//         }
+//     });
+
+// }
 }
