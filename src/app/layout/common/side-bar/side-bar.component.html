@@ -1,0 +1,40 @@
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+<aside class="app-sidebar" id="app-sidebar">
+    <ul class="app-menu">
+
+
+        <li *ngFor="let data of sideBar">
+            <a routerLinkActive="active" [routerLink]="['/'+data?.path]" href="javascript://" class="app-menu__item">
+                <i class="app-menu__icon" [class]="data.icon" aria-hidden="true"></i>
+                <span class="app-menu__label">{{data?.name}}</span>
+            </a>
+        </li>
+
+        <!-- <li> -->
+<!--            <a routerLinkActive="active" class="app-menu__item" href="javascript://" data-toggle="collapse"-->
+<!--               href="#content-management">-->
+<!--                <i class="app-menu__icon fa fa-certificate" aria-hidden="true"></i>-->
+<!--                <span class="app-menu__label">Content Management</span>-->
+<!--                <i class="fa fa-caret-down" aria-hidden="true"></i>-->
+<!--            </a>-->
+<!--            <ul class="collapse" id="content-management">-->
+<!--                <li>-->
+<!--                    <a routerLinkActive="active" [routerLink]="['/info_pages_privacy']" class="app-menu__item"-->
+<!--                       href="javascript://">-->
+<!--                        <span class="ml-3 app-menu__label">Privacy Policy</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+
+
+        <li>
+            <a (click)="logout()" class="app-menu__item" href="javascript://">
+                <i class="app-menu__icon fa fa-sign-out"></i>
+                <span class="app-menu__label">Logout</span>
+            </a>
+        </li>
+    </ul>
+</aside>

@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+        Product Details
+    </h4>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <accordion [isAnimated]="true" class="cus-accord">
+                <accordion-group heading="Name" [isOpen]="true">
+
+                    <div>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>Language</td>
+                                <td>Name</td>
+                            </tr>
+                            <tr *ngFor="let val of modalData?.name">
+                                <td>{{val?.lang |language}}</td>
+                                <td>{{val.name}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </accordion-group>
+                <accordion-group heading="Short Description" [isOpen]="true">
+
+                    <div>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>Language</td>
+                                <td style="min-width: 140px">Short Description</td>
+                            </tr>
+                            <tr *ngFor="let val of modalData?.shortDescription">
+                                <td>{{val?.lang |language}}</td>
+                                <td>{{val.shortDescription}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </accordion-group>
+                <accordion-group heading="Long Description" [isOpen]="true">
+
+                    <div>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>Language</td>
+                                <td style="min-width: 140px">long Description</td>
+                            </tr>
+                            <tr *ngFor="let val of modalData?.logDescription">
+                                <td>{{val?.lang |language}}</td>
+                                <td>{{val.logDescription}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </accordion-group>
+            </accordion>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <div class="col-md-12 modal-footer-button">
+        <button (click)="bsModalRef.hide()" type="button" class="btn btn-default mr-3">OK</button>
+    </div>
+</div>

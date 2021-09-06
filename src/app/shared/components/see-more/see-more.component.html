@@ -1,0 +1,27 @@
+{{msg |slice:0:25 }}
+<a (click)="staticModal.show()"
+   *ngIf="msg?.length > 24" class="clickable">
+    ...See more</a>
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left"> {{title || 'Details'}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{msg}}
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 modal-footer-button">
+                    <button (click)="staticModal.hide()" type="button" class="btn btn-primary mr-3">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

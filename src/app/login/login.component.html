@@ -1,0 +1,50 @@
+<div style="background-image: url(/assets/img/bitmap.png)">
+    <section class="login back">
+        <div class="box">
+<!--            <div class="left back" style="background-image: url('/assets/img/login-main-img.png')">-->
+<!--                <div class="shade" style="background: rgb(220, 53, 68);opacity: 0.6;">-->
+<!--                    <div class="top"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- <div class="left back">
+                <div class="shade">
+                    <div class="top">
+                        <img src="/assets/img/login-main-img.png" style="margin-top: 40%;width: 100%">
+                    </div>
+                </div>
+            </div> -->
+            <div class="right">
+
+                <div class="text-center login-heading">
+                    Medcial Exam Panel
+<!--                    <img src="/assets/img/logo.png" style="    width: 207px;margin-bottom: 2px;">-->
+                </div>
+
+<!--                <h2 class="bold" style="margin-bottom: 0;">Welcome to Portal,</h2>-->
+<!--                <p>Login by entering the information below!</p>-->
+                <form [formGroup]="form" (ngSubmit)="signIn()" ngxScrollToFirstInvalid>
+                    <div class="form-group">
+                        <input class="form-control" (keydown.space)="$event.preventDefault()" formControlName="email"
+                               type="email" placeholder="Email"/>
+                        <span><img src="/assets/img/ic_username.svg"></span>
+                        <div class="text-error" *ngIf="form.controls['email'].errors?.required && show">Please enter
+                            email!
+                        </div>
+                        <div class="text-error" *ngIf="form.controls['email'].errors?.email && show">Please enter valid
+                            email!
+                        </div>
+                    </div>
+                    <div class="form-group pass">
+                        <input type="password" placeholder="Password" class="form-control"
+                               (keydown.space)="$event.preventDefault()" formControlName="password"/>
+                        <span><img src="/assets/img/ic_password.svg"></span>
+                        <div class="text-error" *ngIf="form.controls['password'].errors?.required && show">Please enter
+                            password!
+                        </div>
+                    </div>
+                    <button type="submit" class="bold">Login</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
