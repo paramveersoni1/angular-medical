@@ -4,21 +4,14 @@
     </h4>
 </div>
 
-<form >
+<form [formGroup]="form" (ngSubmit)="addEdit()">
     <div class="modal-body">
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
+        <div class="row" formArrayName="name">
+            <div class="col-lg-10 col-md-12" *ngFor="let nameControl of name?.controls;let i = index" 
+            [formGroup]="nameControl">
                 <div class="form-group">
-                    <label class="required">Name in English</label>
-                    <input type="text"  class="form-control" placeholder="Name">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Name in French</label>
-                    <input type="text"   class="form-control" placeholder="Name">
+                    <label class="required">Name in {{nameControl?.value?.language_id}}</label>
+                    <input type="text" formControlName="name" class="form-control" placeholder="Name">
                 </div>
             </div>
         </div>

@@ -12,8 +12,6 @@ import { HeaderComponent } from './common/header/header.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ChangePasswordModule } from './common/change-password/change-password.module';
 
-
-
 @NgModule({
   declarations: [
     LayoutComponent,

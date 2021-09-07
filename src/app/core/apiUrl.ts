@@ -14,6 +14,10 @@ export const ApiUrl = {
     
     banners: 'Admin/list_banners',
 
-    deletebanner:'Admin​/manage_banners',
+    showplans :'Admin/list_plans',
+
+    deletebanner:'Admin/manage_banners',
+
+    deleteplans :'Admin/manage_plans',
 
 };

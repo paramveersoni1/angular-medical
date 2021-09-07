@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiUrl } from '../../core/apiUrl';
+import { ApiUrl } from 'src/app/core/apiUrl';
 import { HttpService } from 'src/app/services/http/http.service';
+import { UtilService } from 'src/app/services/util/util.service';
+import { MessageService } from 'src/app/services/message/message.service';
+import { SuccessErrorConst } from 'src/app/core/successErrorConst';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AddbannerComponent } from './addbanner/addbanner.component';
 
@@ -15,8 +18,9 @@ export class HomebannerComponent implements OnInit {
 
   showData :any ;
 
-  constructor(private http :HttpService,   private modalService : BsModalService ) { }
-
+  constructor(private http: HttpService, private message: MessageService, public util: UtilService
+    , private modalService: BsModalService) {
+  }
   ngOnInit(){
     this.GetData()
   }
@@ -43,13 +47,31 @@ export class HomebannerComponent implements OnInit {
   }
 
   deletitem(data, index) {
+    this.message.confirm(`delete this ${this.util.title}`).then(result => {
+      if (result.value) {
+        const obj: any = {
+          _id: data._id,
+          is_deleted: true
+
+        };
+        this.http.putData(ApiUrl.deletebanner, obj).subscribe(() => {
+          this.message.toast('success', SuccessErrorConst.deleteSuccess);
+          this.showData.splice(index, 1);
+        });
+      }
+    });
+
+  }
+  
+  blockUnblock(data) {
     const obj: any = {
       _id: data._id,
-      isDeleted: true
+      is_blocked: !data.is_blocked
     };
-    this.http.putData(ApiUrl.deletebanner, obj).subscribe((res) => {
-      this.showData.splice(index, 1)
-    }, error => {});
+    this.http.putData(ApiUrl.deletebanner, obj).subscribe(() => {
+      this.util.checkBlockUnblock(data);
+    }, () => {
+    });
   }
 
 }

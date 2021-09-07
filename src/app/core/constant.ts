@@ -14,6 +14,8 @@ export const SideBarList = {
          {path: 'users', name: 'Users', icon: 'fa fa-users'},
          {path: 'universitie', name: 'University', icon: 'fa fa-university'},
          {path: 'homebanner', name: 'Home Page Banners', icon: 'fa fa-flag'},
+         {path: 'paymentplan', name: 'payment plans', icon: 'fa fa-money'},
+
     ]
 };
 

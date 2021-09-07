@@ -24,6 +24,11 @@ const routes: Routes = [
                 loadChildren: './homebanner/homebanner.module#HomebannerModule',
                 data: {breadcrumb: 'homebanner', title: 'homebanner'}
             },
+            {
+                path: 'paymentplan',
+                loadChildren: './paymentplan/paymentplan.module#PaymentplanModule',
+                data: {breadcrumb: 'paymentplan', title: 'paymentplan'}
+            },
         ]
     }
 ];

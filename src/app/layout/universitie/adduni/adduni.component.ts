@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiUrl } from '../../../core/apiUrl';
 import { HttpService } from 'src/app/services/http/http.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { UtilService } from 'src/app/services/util/util.service';
@@ -15,45 +15,65 @@ import { UtilService } from 'src/app/services/util/util.service';
 export class AdduniComponent implements OnInit {
 
   public onClose: Subject<{}> = new Subject();
-  
-  form : FormGroup;
-  
+
+  form: FormGroup;
+  showError = false;
+  modalData: any;
+
   id = '';
 
-  constructor( private http: HttpService ,private fb : FormBuilder, private bsModalRef : BsModalRef,
-    private util:UtilService) { }
-  
+  constructor(private http: HttpService, private fb: FormBuilder, private bsModalRef: BsModalRef,
+    private util: UtilService) { }
 
 
-  ngOnInit(){
+
+  ngOnInit() {
     this.onClose = new Subject();
+    this.makeForm();
   }
 
-  adduniData(){
-     this.form  = this.fb.group({
-         name: ['', Validators.required ],
-     });
+  makeForm() {
+    this.form = this.fb.group({
+      icon: ['', Validators.required],
+      name: this.fb.array([])
+    });
+    this.addItem('ENGLISH');
+    this.addItem('FRENCH');
+  }
+
+  addItem(language) {
+    let controls = <FormArray>this.form.controls.name;
+    controls.push(this.createItem(language));
+  }
+
+  createItem(language): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      language_id: [language]
+    });
+  }
+
+  get name(): FormArray {
+    return this.form.get('name') as FormArray;
   }
 
   
-
-  formSubmit() {
+  addEdit() {
+    console.log(this.form.value)
     if (this.form.valid) {
-      this.addEdit();
+      const obj = JSON.parse(JSON.stringify(this.form.value));
+      if (this.modalData) {
+        obj[`_id`] = this.modalData._id;
+      } 
+      console.log(obj,"edsknfewn")
+      this.http.postData(ApiUrl.addUnilist, obj).subscribe(() => {
+        this.onClose.next();
+        this.bsModalRef.hide();
+      },  
+      );
+      console.log(this.form.value)
     }
   }
-
-addEdit(){
-  const obj = JSON.parse(JSON.stringify(this.form.value));
-  // console.log(obj,'tyr')
-  if (this.id) {
-    obj['_id'] = this.id;
-  }
-  this.http.postData(ApiUrl.universitielist, obj).subscribe(res => {
-    this.bsModalRef.hide();
-    this.onClose.next();
-  });  
-}
 
 
 }
