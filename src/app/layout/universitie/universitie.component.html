@@ -36,8 +36,9 @@
                                 <td>{{values.name[0].name}}</td>
                                 <td>{{values.name[1].name}}</td>
                                 <td class="xyz">
-                                    <a (click)="blockUnblock(values)"><i class="fa fa-lock" aria-hidden="true"></i></a>
-                                    <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <i (click)="blockUnblock(values)"[ngClass]="!values.isBlocked ? 'fa fa-unlock' : 'fa fa-lock'"
+                                    class="fa-css cursor-pointer action-fa"></i>
+                                    <a><i (click)="addEditModalOpen(values)" class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a (click)=" deletitem(values,i) "><i class="fa fa-trash"
                                             aria-hidden="true"></i></a>
                                 </td>

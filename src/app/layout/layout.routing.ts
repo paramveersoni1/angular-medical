@@ -22,12 +22,12 @@ const routes: Routes = [
             {
                 path: 'homebanner',
                 loadChildren: './homebanner/homebanner.module#HomebannerModule',
-                data: {breadcrumb: 'homebanner', title: 'homebanner'}
+                data: {breadcrumb: 'Homebanner', title: 'homebanner'}
             },
             {
                 path: 'paymentplan',
                 loadChildren: './paymentplan/paymentplan.module#PaymentplanModule',
-                data: {breadcrumb: 'paymentplan', title: 'paymentplan'}
+                data: {breadcrumb: 'AddPlan', title: 'paymentplan'}
             },
         ]
     }

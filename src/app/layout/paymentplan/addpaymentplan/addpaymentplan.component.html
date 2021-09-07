@@ -4,41 +4,21 @@
     </h4>
 </div>
 
-<form >
+<form [formGroup]="form" (ngSubmit)="addEdit()">
+
     <div class="modal-body">
-        <!-- <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Desktop Image (Recomended Size 1440 x 800PX)</label>
-                    <input type="file"  class="form-control" placeholder="Name">
+        <div class="d-flex">
+            <div class="row" formArrayName="name">
+                <div class="col-md-6" *ngFor="let nameControl of name?.controls;let i = index" 
+                [formGroup]="nameControl">
+                    <div class="form-group">
+                        <label class="required">Name in {{nameControl?.value?.language_id}}</label>
+                        <input type="text" formControlName="name" class="form-control" placeholder="Name">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Mobile Image (Recomended Size 1125 x 693PX)</label>
-                    <input type="file"   class="form-control" placeholder="Name">
-                </div>
-            </div>
-        </div> -->
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Description in English</label>
-                    <input type="text"   class="form-control" placeholder="Name">
-                </div>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Description in French</label>
-                    <input type="text"   class="form-control" placeholder="Name">
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal-footer">
         <div class="col-md-12 modal-footer-button">
             <button (click)="bsModalRef.hide()" type="button" class="btn btn-default mr-3">Cancel</button>

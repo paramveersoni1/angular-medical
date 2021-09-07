@@ -16,8 +16,7 @@ import { AdduniComponent } from './adduni/adduni.component';
 export class UniversitieComponent implements OnInit {
 
   allData: any;
-
-
+  id ='';
   constructor(private http: HttpService, private message: MessageService, public util: UtilService
     , private modalService: BsModalService) {
   }

@@ -48,7 +48,8 @@
                                 <td>{{values?.plan_details[0].description[1].description}}</td>
                                 <td><a href="#">view</a></td>
                                 <td class="xyz">
-                                    <a (click)="blockUnblock(values,i)"><i  class="fa fa-lock mr-1" aria-hidden="true"></i></a>
+                                    <i (click)="blockUnblock(values)"[ngClass]="!values.isBlocked ? 'fa fa-unlock' : 'fa fa-lock'"
+                                    class="fa-css cursor-pointer action-fa"></i>
                                     <a><i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
                                     <a (click)=" deletitem(values, i)"><i class="fa fa-trash"
                                             aria-hidden="true"></i></a>

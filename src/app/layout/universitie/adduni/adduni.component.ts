@@ -34,8 +34,7 @@ export class AdduniComponent implements OnInit {
 
   makeForm() {
     this.form = this.fb.group({
-      icon: ['', Validators.required],
-      name: this.fb.array([])
+      name: this.fb.array([]) 
     });
     this.addItem('ENGLISH');
     this.addItem('FRENCH');
@@ -57,19 +56,27 @@ export class AdduniComponent implements OnInit {
     return this.form.get('name') as FormArray;
   }
 
-  
+  patchData(data) {
+    this.id = data._id;
+    // console.log(data)
+    this.form.patchValue({
+      name: data.name,
+    })
+  }
+
+
   addEdit() {
     console.log(this.form.value)
     if (this.form.valid) {
       const obj = JSON.parse(JSON.stringify(this.form.value));
       if (this.modalData) {
         obj[`_id`] = this.modalData._id;
-      } 
-      console.log(obj,"edsknfewn")
+      }
+      console.log(obj, "edsknfewn")
       this.http.postData(ApiUrl.addUnilist, obj).subscribe(() => {
         this.onClose.next();
         this.bsModalRef.hide();
-      },  
+      },
       );
       console.log(this.form.value)
     }

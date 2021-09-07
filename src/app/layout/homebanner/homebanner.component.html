@@ -34,12 +34,13 @@
                         <tbody>
                             <tr *ngFor="let values of showData; let i=index;">
                                 <td>{{i+1}}</td>
-                                <td><img src={{values?.desktop_img_url.original}} alt="dasktop-img"></td>
-                                <td><img src={{values?.mobile_img_url.original}} alt="dasktop-img"></td>
+                                <!-- <td><img src={{values?.desktop_img_url.original}} alt="dasktop-img"></td> -->
+                                <!-- <td><img src={{values?.mobile_img_url.original}} alt="dasktop-img"></td> -->
                                 <td>{{values?.description[0]?.description}}</td>
                                 <td>{{values?.description[1]?.description}}</td>
                                 <td class="xyz">
-                                    <a (click)="blockUnblock(values,i)"><i  class="fa fa-lock" aria-hidden="true"></i></a>
+                                    <i (click)="blockUnblock(values)"[ngClass]="!values.isBlocked ? 'fa fa-unlock' : 'fa fa-lock'"
+                                    class="fa-css cursor-pointer action-fa"></i>
                                     <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a (click)=" deletitem(values, i)"><i class="fa fa-trash"
                                             aria-hidden="true"></i></a>

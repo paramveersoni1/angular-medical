@@ -4,37 +4,33 @@
     </h4>
 </div>
 
-<form >
+
+
+<form [formGroup]="form" (ngSubmit)="addEdit()">
     <div class="modal-body">
         <div class="row">
-            <div class="col-lg-10 col-md-12 ">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="required">Desktop Image (Recomended Size 1440 x 800PX)</label>
-                    <input type="file"  class="form-control" placeholder="Name">
+                    <label class="required">desktop image</label>
+                    <div class="product-images">
+                        <input type="file" class="file-upload" id="picture" (change)="selectImage($event)">
+                        <label for="picture">
+                            <img src="/assets/img/ic_camera.png">
+                        </label>
+                        <ng-container *ngFor="let img of picture;let i=index">
+                            <img class="ml-4 uploaded-img" height="72" for="picture" [src]="img" *ngIf='img'>
+                            <i class="fa fa-times-circle fa-trash-css" (click)="removeImage(i)" *ngIf='img'></i>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
+        <div class="row" formArrayName="description">
+            <div class="col-lg-10 col-md-12" *ngFor="let nameControl of description?.controls;let i = index"
+                [formGroup]="nameControl">
                 <div class="form-group">
-                    <label class="required">Mobile Image (Recomended Size 1125 x 693PX)</label>
-                    <input type="file"   class="form-control" placeholder="Name">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Description in English</label>
-                    <input type="text"   class="form-control" placeholder="Name">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-10 col-md-12 ">
-                <div class="form-group">
-                    <label class="required">Description in French</label>
-                    <input type="text"   class="form-control" placeholder="Name">
+                    <label class="required">Name in {{nameControl?.value?.language_id}}</label>
+                    <input type="text" formControlName="description" class="form-control" placeholder="description">
                 </div>
             </div>
         </div>
