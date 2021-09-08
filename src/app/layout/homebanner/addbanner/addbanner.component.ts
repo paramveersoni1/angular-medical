@@ -34,7 +34,7 @@ export class AddbannerComponent implements OnInit {
 
   bannerData() {
     this.form = this.fb.group({
-      desktop_img_url: [[{}], Validators.required],
+      desktop_img_url: ['', Validators.required],
       description: this.fb.array([])
 
     });
@@ -68,45 +68,53 @@ export class AddbannerComponent implements OnInit {
   selectImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       const obj = {
-        pic: event.target.files[0]
+        image: event.target.files[0]
       };
       this.uploadImage(obj);
+      
     }
   }
 
   uploadImage(obj) {
+    console.log(obj,"image")
     this.http.uploadImageService(ApiUrl.upload_attachment, obj, true).subscribe(response => {
-      let images = this.form.value.desktop_img_url;
-      images.push(response.data.s3Url);
-      this.form.controls.picture.setValue(images);   
-      document.getElementById('image')[`value`] = '';
+      let desktop_img_url = this.form.value.desktop_img_url;
+      desktop_img_url.push(response.data);
+      this.form.controls.desktop_img_url.setValue(desktop_img_url);   
+      document.getElementById('desktop_img_url')[`value`] = '';
     }, () => {
-      document.getElementById('image')[`value`] = '';
+      document.getElementById('desktop_img_url')[`value`] = '';
     });
   }
 
   removeImage(index) {
     let images = this.form.value.picture;
     images.splice(index, 1);
-    this.form.controls.desktop_img_url.setValue(images);
+    this.form.controls.desktop_img_url.setValue(images);   
   }
 
   addEdit() {
     console.log(this.form.value)
+    const obj:any={}
+    if(this.picture.length){
+        
+      obj.picture= (this.picture)
+      console.log(obj, '33333')
+    }
+
     if (this.form.valid) {
       const obj = JSON.parse(JSON.stringify(this.form.value));
       if (this.modalData) {
         obj[`_id`] = this.modalData._id;
       }
-      console.log(obj, "edsknfewn")
+      console.log(obj, "222222")
       this.http.postData(ApiUrl.bannerAdd, obj).subscribe(() => {
         this.onClose.next();
         this.bsModalRef.hide();
       },
       );
-      console.log(this.form.value)
+      console.log(this.form.value,"111111")
     }
   }
-
 
 }

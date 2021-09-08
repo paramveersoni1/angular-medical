@@ -13,12 +13,12 @@
                 <div class="form-group">
                     <label class="required">desktop image</label>
                     <div class="product-images">
-                        <input type="file" class="file-upload" id="picture" (change)="selectImage($event)">
-                        <label for="picture">
+                        <input type="file" class="file-upload" id="desktop_img_url" (change)="selectImage($event)">
+                        <label for="desktop_img_url">
                             <img src="/assets/img/ic_camera.png">
                         </label>
-                        <ng-container *ngFor="let img of picture;let i=index">
-                            <img class="ml-4 uploaded-img" height="72" for="picture" [src]="img" *ngIf='img'>
+                        <ng-container *ngFor="let img of desktop_img_url;let i=index">
+                            <img class="ml-4 uploaded-img" height="72" for="desktop_img_url" [src]="img" *ngIf='img'>
                             <i class="fa fa-times-circle fa-trash-css" (click)="removeImage(i)" *ngIf='img'></i>
                         </ng-container>
                     </div>
